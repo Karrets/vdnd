@@ -1,23 +1,23 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
+import EdgeComponent from '@/components/EdgeComponent.vue';
 
 export default defineComponent({
-  name: 'App'
+  name: 'App',
+  components: { EdgeComponent }
 });
 </script>
 
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
+  <edge-component edge="top">
+    <header>
       <nav>
-        <RouterLink to="/">Home</RouterLink>
+        <router-link to="/">Home</router-link>
       </nav>
-    </div>
-  </header>
+    </header>
+  </edge-component>
 
-  <RouterView />
+  <router-view />
 </template>
 
 <style scoped></style>
