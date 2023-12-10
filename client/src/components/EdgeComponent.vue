@@ -1,6 +1,5 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
-import InvalidArgumentException from '@/models/InvalidArgumentException';
 
 export default defineComponent({
   name: 'EdgeComponent',
@@ -8,6 +7,7 @@ export default defineComponent({
   props: {
     edge: {
       type: String,
+      required: true,
       validator(value: string) {
         return ['top', 'bottom', 'start', 'end'].includes(value);
       }
@@ -22,24 +22,36 @@ export default defineComponent({
         case 'top':
           css = `
             top: 0;
+
+            width: 100%;
+            left: 0;
             flex-direction: row;
           `;
           break;
         case 'bottom':
           css = `
             bottom: 0;
+
+            width: 100%;
+            left: 0;
             flex-direction: row;
           `;
           break;
         case 'start':
           css = `
             left: 0;
+
+            height: 100%;
+            top: 0;
             flex-direction: column;
           `;
           break;
         case 'end':
           css = `
             right: 0;
+
+            height: 100%;
+            top: 0;
             flex-direction: column;
           `;
           break;
@@ -53,6 +65,7 @@ export default defineComponent({
         display: flex;
         justify-content: center;
         align-items: center;
+        z-index: 1;
         ${css}
       `;
     }
