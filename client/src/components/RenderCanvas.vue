@@ -2,54 +2,35 @@
 import { defineComponent } from 'vue';
 
 import Two from 'two.js';
-import ZUIfy from '@/models/ZUI';
+import Projector from '@/models/Projector';
 
 export default defineComponent({
   name: 'RenderCanvas',
 
   data() {
     return {
-      two: new Two({
-        fullscreen: true,
-        autostart: true,
-        type: Two.Types.canvas
-      }),
-
-      canvas: {} as HTMLCanvasElement,
-      stage: {} as any,
-      shapes: {} as any
+      projector: {} as Projector
     };
   },
 
-  methods: {
-    mouseMoved(e: MouseEvent) {
-      let rect = this.canvas.getBoundingClientRect();
-      let pos = {
-        x: e.clientX - rect.left,
-        y: e.clientY - rect.top
-      };
-      this.shapes['myCircle'].position.set(pos.x, pos.y);
-    }
-  },
+  methods: {},
 
   mounted() {
-    this.two.appendTo(this.$refs.canvasContainer as HTMLDivElement);
+    this.projector = new Projector([], {
+      fullscreen: true,
+      autostart: true,
+      domElement: this.$refs.canvas as HTMLCanvasElement
+    });
 
-    this.canvas = this.two.renderer.domElement;
-    this.stage = new Two.Group([(this.shapes['myCircle'] = new Two.Circle(0, 0, 10))]);
-
-    for (let i = 0; i < 100; i++) {
-      this.stage.add(new Two.Line(10 * i, 0, 10 * i, 100));
-    }
-
-    this.two.add(this.stage);
-    ZUIfy(this.two, this.stage);
+    this.projector.add(new Two.Circle(10, 10, 100), true);
+    this.projector.add(new Two.Rectangle(200, 200, 100, 100));
+    console.log(this.projector);
   }
 });
 </script>
 
 <template>
-  <div @mousemove="mouseMoved" ref="canvasContainer"></div>
+  <canvas ref="canvas"></canvas>
 </template>
 
 <style scoped></style>
