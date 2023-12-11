@@ -7,7 +7,7 @@ import router from './router';
 
 import { Inkline, components } from '@inkline/inkline';
 
-import '@/css/variables/index.scss';
+import '@/css/inkline_css/index.scss';
 import '@inkline/inkline/css/index.scss';
 import '@inkline/inkline/css/utilities.scss';
 

@@ -2,29 +2,36 @@ import express from "express";
 import path from "node:path";
 import fs from "fs/promises";
 
-const environment = process.env.NODE_ENV || '';
-const clientRouter = express.Router();
+import {expressLog} from "./util";
 
-clientRouter.get('/src/*', (req, res) => {
-    res.redirect(303, `http://localhost:5173/${req.path}`);
-});
+const environment = process.env.ENV || '';
+const rootDir = process.env.ROOT_DIR;
+const manifestPath = path.join(rootDir || path.resolve(), "dist", ".vite", "manifest.json");
+let lazyManifest = null;
 
-clientRouter.get("/*", async (_req, res) => {
-    const data = {
-        environment,
-        manifest: await parseManifest(),
-    };
 
-    res.render("index.html.ejs", data);
-});
+export default function clientRouter() {
+    const router = express.Router();
 
-const parseManifest = async () => {
+    router.get("/*", async (req, res) => {
+        expressLog(`serving page @ root${req.path}`);
+
+        res.render("index.html.ejs", {
+            cache: true,
+            environment,
+            manifest: lazyManifest ??= parseManifest()
+        });
+    });
+
+    return router;
+}
+
+async function parseManifest() {
+    expressLog('Fetching manifest for first time... Fingers crossed!');
+
     if (environment !== "production") return {};
-    const manifestPath = path.join(path.resolve(), "client", "dist", ".vite", "manifest.json");
 
     return fs.readFile(manifestPath, 'utf8')
         .catch(reason => console.error(reason))
         .then(data => JSON.parse(data || '{}'));
-};
-
-export default clientRouter;
+}

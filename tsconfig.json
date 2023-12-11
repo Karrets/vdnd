@@ -7,8 +7,21 @@
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true
-  },
-  "include": ["vite.config.ts","client/**/*.ts", "server/**/*.ts"],
-  "exclude": ["node_modules"]
+    "forceConsistentCasingInFileNames": true,
+    "_comment": "Fixes intellisense around importing using vite alias, when it isn't automatically found...",
+    "baseUrl": ".",
+    "paths": {
+      "@/*": [
+        "client/src/*"
+      ]
+    },
+    "include": [
+      "vite.config.ts",
+      "client/**/*.ts",
+      "server/**/*.ts"
+    ],
+    "exclude": [
+      "node_modules"
+    ]
+  }
 }

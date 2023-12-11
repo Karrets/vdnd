@@ -5,7 +5,7 @@ import type { UserOptions } from '@inkline/plugin';
 import {fileURLToPath} from "node:url";
 
 const inklineConfig: UserOptions = {
-  outputDir: 'client/src/css/variables'
+  outputDir: 'client/src/css/inkline_css/'
 };
 
 // https://vitejs.dev/config/
@@ -19,9 +19,11 @@ export default defineConfig({
     }
   },
   build: {
+    outDir: '../dist',
     manifest: true,
+    emptyOutDir: true,
     rollupOptions: {
-      input: './client/src/main.ts'
+      input: ['./client/src/main.ts']
     }
   }
 });
