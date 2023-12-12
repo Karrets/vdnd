@@ -3,6 +3,7 @@ import path from "node:path";
 import fs from "fs/promises";
 
 import {expressLog} from "./util";
+import {send} from "vite";
 
 const environment = process.env.ENV || '';
 const rootDir = process.env.ROOT_DIR;
@@ -16,11 +17,17 @@ export default function clientRouter() {
     router.get("/*", async (req, res) => {
         expressLog(`serving page @ root${req.path}`);
 
-        res.render("index.html.ejs", {
-            cache: true,
-            environment,
-            manifest: lazyManifest ??= parseManifest()
-        });
+        res.render(
+            "index.html.ejs",
+            {
+                cache: true,
+                environment,
+                manifest: lazyManifest ??= parseManifest()
+            },
+            (err, html) => {
+                if(err) console.error(err);
+                res.send(err || html)
+            });
     });
 
     return router;
@@ -32,6 +39,9 @@ async function parseManifest() {
     if (environment !== "production") return {};
 
     return fs.readFile(manifestPath, 'utf8')
-        .catch(reason => console.error(reason))
-        .then(data => JSON.parse(data || '{}'));
+        .catch(err => {
+            console.error(err);
+            return '{}';
+        })
+        .then(data => JSON.parse(data));
 }
