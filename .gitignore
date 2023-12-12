@@ -1,5 +1,5 @@
 *.js
-client/src/inkline_css/
+client/src/css/inkline_css/
 package-lock.json
 dist/
 
