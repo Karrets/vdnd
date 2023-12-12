@@ -2,13 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="icon" href="<%=`${webroot}/favicon.ico`%>">
+    <link rel="icon" href="<%=`/favicon.ico`%>">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vite App</title>
 
     <% if(environment === 'production') { %>
         <% manifest['src/main.ts'].css.forEach(file => { %>
-            <link rel="stylesheet" href="<%= `${webroot}/${file}` %>">
+            <link rel="stylesheet" href="<%= file %>">
         <% }) %>
     <% } %>
 
@@ -16,7 +16,7 @@
 <body>
 <div id="app"></div>
 <% if (environment === 'production') { %>
-    <script type="module" src="<%= `${webroot}/${manifest['src/main.ts'].file}` %>"></script>
+    <script type="module" src="<%= manifest['src/main.ts'].file %>"></script>
 <% } else { %>
     <script type="module" src="http://localhost:5173/@vite/client"></script>
     <script type="module" src="http://localhost:5173/src/main.ts"></script>

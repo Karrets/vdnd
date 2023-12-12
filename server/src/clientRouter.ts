@@ -5,7 +5,6 @@ import fs from "fs/promises";
 import {expressLog} from "./util";
 
 const environment = process.env.ENV || '';
-const webroot = process.env.WEB_ROOT || '';
 const rootDir = process.env.ROOT_DIR;
 const manifestPath = path.join(rootDir || path.resolve(), "dist", ".vite", "manifest.json");
 let lazyManifest =  {_comment: "manifest was never reassigned, this should never occur", _invalid: true};
@@ -25,7 +24,6 @@ export default function clientRouter() {
             {
                 cache: true,
                 environment,
-                webroot,
                 manifest: lazyManifest
             },
             (err, html) => {
