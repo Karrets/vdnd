@@ -8,8 +8,11 @@ const inklineConfig: UserOptions = {
   outputDir: 'client/src/css/inkline_css/'
 };
 
+const webroot = process.env.WEB_ROOT || '/';
+
 // https://vitejs.dev/config/
 export default defineConfig({
+  base: webroot,
   root: 'client/',
   plugins: [inkline(inklineConfig), inkline(inklineConfig), vue()],
   resolve: {
