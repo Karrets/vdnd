@@ -7,7 +7,7 @@ import {expressLog} from "./util";
 const environment = process.env.ENV || '';
 const rootDir = process.env.ROOT_DIR;
 const manifestPath = path.join(rootDir || path.resolve(), "dist", ".vite", "manifest.json");
-let lazyManifest: object | null = null;
+let lazyManifest =  {_comment: "manifest was never reassigned, this should never occur", _invalid: true};
 
 
 export default function clientRouter() {
@@ -16,12 +16,15 @@ export default function clientRouter() {
     router.get("/*", async (req, res) => {
         expressLog(`serving page @ root${req.path}`);
 
+        if(lazyManifest._invalid)
+            lazyManifest = await parseManifest();
+
         res.render(
             "index.html.ejs",
             {
                 cache: true,
                 environment,
-                manifest: lazyManifest ??= parseManifest()
+                manifest: lazyManifest
             },
             (err, html) => {
                 if (err) {
@@ -42,7 +45,10 @@ async function parseManifest() {
 
     if (environment !== "production") {
         expressLog("Running in development, so no manifest exists!");
-        return {_comment: "Running in development, so no manifest exists!"};
+        return {
+            _comment: "Running in development, so no manifest exists!",
+            _invalid: true
+        };
     }
 
     expressLog("Fetching manifest at path", manifestPath);
@@ -50,7 +56,11 @@ async function parseManifest() {
     return fs.readFile(manifestPath, 'utf8')
         .catch(err => {
             expressLog(`fs read gave an error, here's what we know: ${JSON.stringify(err)}`);
-            return `{"_comment": "fs read gave an error, here's what we know: ${JSON.stringify(err)}"}`;
+            return `
+            {
+                "_comment": "fs read gave an error, here's what we know: ${JSON.stringify(err)},
+                "_invalid": true
+            }`;
         })
         .then(data => JSON.parse(data));
 }
