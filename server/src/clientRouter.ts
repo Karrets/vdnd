@@ -42,13 +42,13 @@ async function parseManifest() {
 
     if (environment !== "production") {
         expressLog("Running in development, so no manifest exists!");
-        return {};
+        return {_comment: "Running in development, so no manifest exists!"};
     }
 
     return fs.readFile(manifestPath, 'utf8')
         .catch(err => {
             expressLog(`fs read gave an error, here's what we know: ${JSON.stringify(err)}`);
-            return '{}';
+            return `{"_comment": "fs read gave an error, here's what we know: ${JSON.stringify(err)}"}`;
         })
         .then(data => JSON.parse(data));
 }
