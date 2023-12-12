@@ -2,11 +2,11 @@ import express from "express";
 import path from "node:path";
 import fs from "fs/promises";
 
-import {expressLog} from "./util";
+import {expressLog} from "../util.js";
 
-const environment = process.env.ENV || '';
-const rootDir = process.env.ROOT_DIR;
-const manifestPath = path.join(rootDir || path.resolve(), "dist", ".vite", "manifest.json");
+const environment = process.env.NODE_ENV || 'development';
+const rootDir = process.env.ROOT_DIR || '';
+const manifestPath = path.join(rootDir || path.resolve('./dist'), "client", ".vite", "manifest.json");
 let lazyManifest =  {_comment: "manifest was never reassigned, this should never occur", _invalid: true};
 
 

@@ -19,7 +19,7 @@ export default defineConfig({
     }
   },
   build: {
-    outDir: '../dist',
+    outDir: '../dist/client',
     manifest: true,
     emptyOutDir: true,
     rollupOptions: {

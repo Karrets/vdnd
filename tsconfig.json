@@ -6,7 +6,6 @@
     "outDir": "./dist",
     "strict": true,
     "esModuleInterop": true,
-    "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "_comment": "Fixes intellisense around importing using vite alias, when it isn't automatically found...",
     "baseUrl": ".",
