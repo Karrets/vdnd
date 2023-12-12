@@ -45,6 +45,8 @@ async function parseManifest() {
         return {_comment: "Running in development, so no manifest exists!"};
     }
 
+    expressLog("Fetching manifest at path", manifestPath);
+
     return fs.readFile(manifestPath, 'utf8')
         .catch(err => {
             expressLog(`fs read gave an error, here's what we know: ${JSON.stringify(err)}`);
