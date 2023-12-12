@@ -24,7 +24,7 @@ let server = app.listen(port, () => {
         if (rootDir == null)
             console.error(`${consoleColors.red}[ SECURITY RISK ]${consoleColors.reset} You're running in production mode, but don't have a web root path set, use the ROOT_DIR environment variable to set it. In some cases having this variable unset may lead to undesired results.`);
         else
-            expressLog(`Root dir set to ${rootDir} Assets will be served from here rather than the cwd...`)
+            expressLog(`Root dir set to '${rootDir}'. Assets will be served from here rather than the current working directory...`)
     }
 
     expressLog(`Server live & listening @ http://localhost:${port}`);

@@ -25,8 +25,8 @@ export default function clientRouter() {
             },
             (err, html) => {
                 if (err) {
-                    expressLog(`errored with manifest:\n ${JSON.stringify(lazyManifest)}`);
-                    expressLog(`express gave the following information:\n ${JSON.stringify(err)}`);
+                    expressLog(`errored with manifest: ${JSON.stringify(lazyManifest)}`);
+                    expressLog(`express gave the following information: ${JSON.stringify(err)}`);
                     res.status(500).send()
                 } else {
                     res.send(html);
@@ -40,11 +40,14 @@ export default function clientRouter() {
 async function parseManifest() {
     expressLog('Fetching manifest for first time... Fingers crossed!');
 
-    if (environment !== "production") return {};
+    if (environment !== "production") {
+        expressLog("Running in development, so no manifest exists!");
+        return {};
+    }
 
     return fs.readFile(manifestPath, 'utf8')
         .catch(err => {
-            console.error(err);
+            expressLog(`fs read gave an error, here's what we know: ${JSON.stringify(err)}`);
             return '{}';
         })
         .then(data => JSON.parse(data));
