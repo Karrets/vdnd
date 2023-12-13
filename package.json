@@ -10,22 +10,23 @@
     "dev:frontend": "vite",
     "dev:backend": "tsx watch server/src/index.ts",
     "dev": "ENV=development concurrently 'npm:dev:frontend' 'npm:dev:backend'",
-
     "build:client": "NODE_ENV=production vite build",
-    "build:server": "tsc --project tsconfig.prod.json",
+    "build:server": "tsc --project server.tsconfig.json && tsc-alias",
     "build": "npm run build:client && npm run build:server",
     "start": "NODE_ENV=production node dist/server/index.js"
   },
   "dependencies": {
     "@inkline/inkline": "^4.2.1",
+    "axios": "^1.6.2",
     "ejs": "^3.1.9",
     "express": "^4.18.2",
     "helmet": "^7.1.0",
+    "mongoose": "^8.0.3",
     "socket.io": "^4.7.2",
     "socket.io-client": "^4.7.2",
-    "sqlite3": "^5.1.6",
     "two.js": "^0.8.12",
     "typescript": "^5.3.3",
+    "uuid": "^9.0.1",
     "vue": "^3.3.8",
     "vue-router": "^4.2.5"
   },
@@ -36,10 +37,13 @@
     "@types/ejs": "^3.1.5",
     "@types/express": "^4.17.21",
     "@types/node": "^20.10.3",
+    "@types/uuid": "^9.0.7",
     "@vitejs/plugin-vue": "^4.5.1",
     "@vue/tsconfig": "^0.4.0",
     "concurrently": "^8.2.2",
+    "prettier": "^3.1.1",
     "sass": "^1.64.0",
+    "tsc-alias": "^1.8.8",
     "tsx": "^4.6.2",
     "vite": "^5.0.0"
   }

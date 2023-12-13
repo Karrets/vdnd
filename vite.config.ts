@@ -2,7 +2,7 @@ import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import inkline from '@inkline/plugin/vite';
 import type { UserOptions } from '@inkline/plugin';
-import {fileURLToPath} from "node:url";
+import { fileURLToPath } from 'node:url';
 
 const inklineConfig: UserOptions = {
   outputDir: 'client/src/css/inkline_css/'
@@ -15,7 +15,9 @@ export default defineConfig({
   resolve: {
     alias: {
       // noinspection
-      '@': fileURLToPath(new URL('./client/src', import.meta.url))
+      '@': fileURLToPath(new URL('./client/src', import.meta.url)),
+      '#': fileURLToPath(new URL('./shared/', import.meta.url)),
+      '_': fileURLToPath(new URL('./server/src', import.meta.url))
     }
   },
   build: {

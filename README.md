@@ -45,4 +45,6 @@ All configuration is done through environment variables, check the table below:
 | PORT                 | Numeric                       | Changes port to set variable, defaults to 8080                                              |
 | NODE_ENV             | "development" or "production" | If unset, defaults to development. Changes operating mode.                                  |
 | ROOT_DIR             | Path                          | Changes root directory of served files. Should be set to the folder which contains `dist/`. |
+| MONGODB_URL          | URL                           | URL / Connection string for mongodb as used by mongoose.                                    |
+| DB_NAME              | String                        | Name of database to use, defaults to `vdungeons`                                            |
 | SUPPRESS_SANITY      | Set / Unset                   | Suppresses a notice encouraging production environments to be put behind a reverse proxy.   |

@@ -3,23 +3,17 @@
     "target": "es6",
     "module": "esnext",
     "moduleResolution": "Node",
-    "outDir": "./dist/client", //Vite doesn't use this option, see vite.config.ts for that...
+    "outDir": "./dist/server",
     "strict": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": ["client/src/*"], //Fixes intellisense
-      "#/*": ["shared/*"],
+      "@/*": ["client/src/*"],
       "_/*": ["server/src/*"]
     }
   },
-  "include": [
-    "vite.config.ts",
-    "server/**/*.ts",
-    "client/**/*.ts",
-    "shared/**/*.ts"
-  ],
+  "include": ["server/**/*.ts"],
   "tsc-alias": {
     "resolveFullPaths": true
   }

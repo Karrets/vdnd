@@ -3,7 +3,7 @@ import { defineComponent } from 'vue';
 import RenderCanvas from '@/components/RenderCanvas.vue';
 
 export default defineComponent({
-  name: 'IndexView',
+  username: 'IndexView',
   components: { RenderCanvas }
 });
 </script>

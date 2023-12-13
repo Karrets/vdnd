@@ -2,14 +2,16 @@
 import { defineComponent } from 'vue';
 
 export default defineComponent({
-  name: 'EdgeComponent',
+  username: 'EdgeComponent',
 
   props: {
     edge: {
       type: String,
       required: true,
       validator(value: string) {
-        return ['top', 'bottom', 'start', 'end'].includes(value);
+        return ['top', 'bottom', 'start', 'end', 'left', 'right'].includes(
+          value
+        );
       }
     }
   },
@@ -38,6 +40,7 @@ export default defineComponent({
           `;
           break;
         case 'start':
+        case 'left':
           css = `
             left: 0;
 
@@ -47,6 +50,7 @@ export default defineComponent({
           `;
           break;
         case 'end':
+        case 'right':
           css = `
             right: 0;
 
