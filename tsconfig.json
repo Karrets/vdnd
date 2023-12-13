@@ -3,7 +3,7 @@
     "target": "es6",
     "module": "esnext",
     "moduleResolution": "Node",
-    "outDir": "./dist/client", //Vite doesn't use this option, see vite.config.ts for that...
+    "outDir": "./dist/", //Vite doesn't use this option, see vite.config.ts for that...
     "strict": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,

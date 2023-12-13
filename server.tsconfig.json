@@ -3,7 +3,7 @@
     "target": "es6",
     "module": "esnext",
     "moduleResolution": "Node",
-    "outDir": "./dist/server",
+    "outDir": "./dist/",
     "strict": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
@@ -14,7 +14,7 @@
       "_/*": ["server/src/*"]
     }
   },
-  "include": ["server/**/*.ts"],
+  "include": ["server/**/*.ts","shared/**/*.ts"],
   "tsc-alias": {
     "resolveFullPaths": true
   }

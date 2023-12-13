@@ -11,9 +11,9 @@
     "dev:backend": "tsx watch server/src/index.ts",
     "dev": "ENV=development concurrently 'npm:dev:frontend' 'npm:dev:backend'",
     "build:client": "NODE_ENV=production vite build",
-    "build:server": "tsc --project server.tsconfig.json && tsc-alias",
+    "build:server": "tsc --project server.tsconfig.json && tsc-alias -p server.tsconfig.json",
     "build": "npm run build:client && npm run build:server",
-    "start": "NODE_ENV=production node dist/server/index.js"
+    "start": "NODE_ENV=production node dist/server/src/index.js"
   },
   "dependencies": {
     "@inkline/inkline": "^4.2.1",

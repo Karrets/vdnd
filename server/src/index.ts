@@ -1,4 +1,4 @@
-import { server } from '_/net/server.js';
+import { server } from '_/net/server';
 import { gracefulExit } from '_/util';
 import initDatabase from '_/db/database';
 
