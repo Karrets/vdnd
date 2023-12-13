@@ -35,6 +35,7 @@ function gracefulExit(signal: NodeJS.Signals) {
     });
 
     if (internalHttpServer.closeAllConnections) {
+      setTimeout(() => process.exit(0), 5000);
       internalHttpServer.closeAllConnections();
     } else {
       setTimeout(() => process.exit(0), 5000);
