@@ -1,4 +1,6 @@
 *.js
+!client/src/models/zuiEventListeners.js
+
 client/src/css/inkline_css/
 package-lock.json
 dist/
